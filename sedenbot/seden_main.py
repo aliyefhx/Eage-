@@ -1,19 +1,3 @@
-# Copyright (C) 2020 TeamDerUntergang.
-#
-# SedenUserBot is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# SedenUserBot is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#
-
 """ UserBot başlangıç noktası """
 
 from importlib import import_module
@@ -26,7 +10,7 @@ from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
 from . import BRAIN_CHECKER, BLACKLIST, LOGS, bot, CONSOLE_LOGGER_VERBOSE
 from .moduller import ALL_MODULES
 
-INVALID_PH = '\nHATA: Girilen telefon numarası geçersiz' \
+INVALID_PH = '\nXƏTA: Girilən telefon nömrəsi geçersiz' \
              '\n  Ipucu: Ülke kodunu kullanarak numaranı gir' \
              '\n       Telefon numaranızı tekrar kontrol edin'
 
@@ -69,15 +53,15 @@ except PhoneNumberInvalidError:
 
 for module_name in ALL_MODULES:
     try:
-        LOGS.info(f'{module_name} yükleniyor ...')
-        import_module("sedenbot.moduller." + module_name)
+        LOGS.info(f'{module_name} yüklenir ...')
+        import_module("eagebot.moduller." + module_name)
     except Exception as e:
         if CONSOLE_LOGGER_VERBOSE:
             raise e
-        LOGS.warn(f"{module_name} modülü yüklenirken bir hata oluştu.")
+        LOGS.warn(f"{module_name} modülü yüklenirken bir xəta oldu.")
 
-LOGS.info("Botunuz çalışıyor! Herhangi bir sohbete .alive yazarak Test edin."
-          " Yardıma ihtiyacınız varsa, Destek grubumuza gelin https://telegram.me/SedenUserBotSupport")
-LOGS.info("Bot sürümünüz Seden v3.5 EOL")
+LOGS.info("Botunuz işləyir! Herhangi bir sohbəte .alive yazarak Test edin."
+          " Yardıma ihtiyacınız varsa, Destek grubumuza gelin https://telegram.me/EageBotSupport")
+LOGS.info("Bot sürümünüz EageAze")
 
 bot.run_until_disconnected()
