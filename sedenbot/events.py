@@ -29,7 +29,7 @@ from telethon import events
 from sedenbot import bot, BOTLOG, BOTLOG_CHATID, LOGSPAMMER, BLACKLIST, me
 
 def sedenify(**args):
-    """ Yeni bir etkinlik kaydedin. """
+    """ Yeni bir etkinlik qeyd edildi. """
     pattern = args.get('pattern', None)
     disable_edited = args.get('disable_edited', False)
     ignore_unsafe = args.get('ignore_unsafe', False)
@@ -85,30 +85,30 @@ def sedenify(**args):
                     try:
                         date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
-                        text = "**USERBOT HATA RAPORU**\n"
-                        link = "[Seden Destek Grubu](https://t.me/SedenUserBotSupport)"
-                        text += "İsterseniz, bunu rapor edebilirsiniz "
-                        text += f"- sadece bu mesajı buraya iletin {link}.\n"
-                        text += "Hata ve Tarih dışında hiçbir şey kaydedilmez\n"
+                        text = "**USERBOT XƏTA RAPORU**\n"
+                        link = "[Seden Destek Grubu](https://t.me/EageBotSupport)"
+                        text += "İstəseniz, bunu bildirin."
+                        text += f"- sadece bu mesajı bura göndərin {link}.\n"
+                        text += "Xəta və Tarix xaricində heçnər qeyd edilməz\n"
 
-                        ftext = "========== UYARI =========="
-                        ftext += "\nBu dosya sadece burada yüklendi,"
-                        ftext += "\nsadece hata ve tarih kısmını kaydettik,"
-                        ftext += "\ngizliliğinize saygı duyuyoruz,"
+                        ftext = "========== OXU =========="
+                        ftext += "\nBu fayl sadəcə burada yüklendi,"
+                        ftext += "\nsadəcə xəta və tarix'i qeydetddik,"
+                        ftext += "\ngizliliğinize sayqı duyuyoruz,"
                         ftext += "\nburada herhangi bir gizli veri varsa"
-                        ftext += "\nbu hata raporu olmayabilir, kimse verilerinize ulaşamaz.\n"
+                        ftext += "\nbu xəta  olmayabilər, kimsə verilerinize ulaşamaz.\n"
                         ftext += "================================\n\n"
-                        ftext += "--------USERBOT HATA GUNLUGU--------\n"
-                        ftext += "\nTarih: " + date
+                        ftext += "--------USERBOT XƏTA GUNLUGU--------\n"
+                        ftext += "\nTarix: " + date
                         ftext += "\nGrup ID: " + str(check.chat_id)
-                        ftext += "\nGönderen kişinin ID: " + str(check.sender_id)
+                        ftext += "\nGöndərən kişinin ID: " + str(check.sender_id)
                         ftext += "\n\nOlay Tetikleyici:\n"
                         ftext += str(check.text)
                         ftext += "\n\nGeri izleme bilgisi:\n"
                         ftext += str(format_exc())
-                        ftext += "\n\nHata metni:\n"
+                        ftext += "\n\nHəta mətni:\n"
                         ftext += str(sys.exc_info()[1])
-                        ftext += "\n\n--------USERBOT HATA GUNLUGU BITIS--------"
+                        ftext += "\n\n--------USERBOT XƏTA GUNLUGU BITIS--------"
 
                         command = "git log --pretty=format:\"%an: %s\" -10"
 
@@ -123,14 +123,14 @@ def sedenify(**args):
 
                         ftext += result
 
-                        file = open("hata.log", "w+")
+                        file = open("xəata.log", "w+")
                         file.write(ftext)
                         file.close()
 
                         await check.client.send_file(BOTLOG_CHATID
                                                  if BOTLOG
-                                                 else me.id, "hata.log", caption=text, )
-                        remove("hata.log")
+                                                 else me.id, "xəta.log", caption=text, )
+                        remove("xəta.log")
                     except:
                         pass
 
