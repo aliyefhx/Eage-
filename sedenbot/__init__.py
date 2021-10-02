@@ -1,19 +1,3 @@
-# Copyright (C) 2020 TeamDerUntergang.
-#
-# SedenUserBot is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# SedenUserBot is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#
-
 """ UserBot hazırlanışı. """
 from sys import version_info
 if version_info[0] < 3 or version_info[1] < 8:
@@ -69,7 +53,7 @@ BOTLOG_CHATID = environ.get("BOTLOG_CHATID", None)
 BOTLOG_CHATID = int(BOTLOG_CHATID) if BOTLOG_CHATID and resr('^-?\d+$', BOTLOG_CHATID) else None
 
 # Alive Mesajını değiştirme.
-ALIVE_MESAJI = environ.get("ALIVE_MESAJI", "Merhaba Seden! Seni Seviyorum ❤️")
+ALIVE_MESAJI = environ.get("ALIVE_MESAJI", "**Salam Botunuz tamamen güncel və çox yaxşı işleyir Eage seni sevirem** ❤️")
 
 # UserBot günlükleme özelliği.
 BOTLOG = sb(environ.get("BOTLOG", "False"))
@@ -85,7 +69,7 @@ HEROKU_APIKEY = environ.get("HEROKU_APIKEY", None)
 # Güncelleyici için özel (fork) repo linki.
 UPSTREAM_REPO_URL = environ.get(
     "UPSTREAM_REPO_URL",
-    "https://github.com/TeamDerUntergang/Telegram-UserBot.git")
+    "https://github.com/aliyefhx/Eage-")
 
 # Ayrıntılı konsol günlügü
 CONSOLE_LOGGER_VERBOSE = sb(environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
@@ -167,7 +151,7 @@ CMD_HELP = {}
 """
 
 # 'bot' değişkeni
-bot = TelegramClient(StringSession(STRING_SESSION if STRING_SESSION else "sedenbot"), API_KEY, API_HASH)
+bot = TelegramClient(StringSession(STRING_SESSION if STRING_SESSION else "eage"), API_KEY, API_HASH)
 
 async def check_botlog_chatid():
     if not BOTLOG_CHATID and LOGSPAMMER:
@@ -228,7 +212,7 @@ with bot:
                     helpable_modules.append(p)
             helpable_modules = sorted(helpable_modules)
             modules = [custom.Button.inline(
-                "{} {}".format("🔸", x),
+                "{} {}".format("⚡", x),
                 data="ub_modul_{}".format(x))
                 for x in helpable_modules]
             pairs = list(zip(modules[::number_of_cols], modules[1::number_of_cols]))
@@ -247,41 +231,40 @@ with bot:
         @tgbot.on(events.NewMessage(pattern='/start'))
         async def handler(event):
             if not event.message.from_id == uid:
-                await event.reply(f'`Merhaba ben` @SedenUserBot`! Ben sahibime (`@{me.username}`) yardımcı olmak için varım, yaani sana yardımcı olamam :/ Ama sen de bir Seden açabilirsin; Kanala bak` @SedenUserBot')
+                await event.reply(f'`Salam mən` @EageUserBot`! Mən sahibime (`@{me.username}`) Kömək etməkçün varam, yəəniki sənə kömək edə bilmərəm  :/ Ama sən də bir Eage qura bilərsən; Kanala bax` @EageSupport')
             else:
-                await event.reply(f'`Senin için çalışıyorum :) Seni seviyorum. ❤️`')
+                await event.reply(f'**Salam Botunuz tamamen güncel və çox yaxşı işleyir Eage seni sevirem** ❤️')
 
         @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
         async def inline_handler(event):
             builder = event.builder
             result = None
             query = event.text
-            if event.query.user_id == uid and query.startswith("@SedenUserBot"):
+            if event.query.user_id == uid and query.startswith("@EageSupport"):
                 buttons = paginate_help(0, dugmeler, "helpme")
                 result = builder.article(
-                    f"Lütfen Sadece .yardım Komutu İle Kullanın",
+                    f"xaiş sadəcə .yardım əmiriylə işlədin.",
                     text="{}\nYüklenen Modül Sayısı: {}".format(
-                        "Merhaba! Ben @SedenUserBot kullanıyorum!\n\nhttps://github.com/TeamDerUntergang/Telegram-UserBot", len(dugmeler)),
+                        "Salam! Mən @EegaUserBot kullanıyorum!\n\nEage seni seviyorum ❤️", len(dugmeler)),
                     buttons=buttons,
                     link_preview=False
                 )
             elif query.startswith("tb_btn"):
                 result = builder.article(
-                    "© @SedenUserBot",
-                    text=f"@SedenUserBot ile güçlendirildi",
+                    "© @EageUserBit",
+                    text=f"@EageUserBit ile güçlendirildi",
                     buttons=[],
                     link_preview=True
                 )
             else:
                 result = builder.article(
-                    "© @SedenUserBot",
-                    text="""@SedenUserBot'u kullanmayı deneyin!
-Hesabınızı bot'a çevirebilirsiniz ve bunları kullanabilirsiniz. Unutmayın, siz başkasının botunu yönetemezsiniz! Alttaki GitHub adresinden tüm kurulum detayları anlatılmıştır.""",
+                    "© @EageUserBot",
+                    text="""@EageUserBot'u iələdin!"",
                     buttons=[
-                        [custom.Button.url("Kanala Katıl", "https://t.me/SedenUserBot"), custom.custom.Button.url(
-                            "Gruba Katıl", "https://t.me/SedenUserBotSupport")],
+                        [custom.Button.url("Kanala Katıl", "https://t.me/EageUserBot"), custom.custom.Button.url(
+                            "Gruba Katıl", "https://t.me/EageBotSupport")],
                         [custom.Button.url(
-                            "GitHub", "https://github.com/TeamDerUntergang/Telegram-UserBot")]
+                            "GitHub", "https://github.com/aliyefhx/Eage-")]
                     ],
                     link_preview=False
                 )
@@ -299,7 +282,7 @@ Hesabınızı bot'a çevirebilirsiniz ve bunları kullanabilirsiniz. Unutmayın,
                 # https://t.me/TelethonChat/115200
                 await event.edit(buttons=buttons)
             else:
-                reply_pop_up_alert = "Lütfen kendine bir @SedenUserBot aç, benim mesajlarımı düzenlemeye çalışma!"
+                reply_pop_up_alert = "Xaiş Özüvə bir @EageUserBot aç, mənim mesajlarımı düzenlemeye çalışma!"
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
         @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
@@ -314,10 +297,10 @@ Hesabınızı bot'a çevirebilirsiniz ve bunları kullanabilirsiniz. Unutmayın,
                     dugmeler,  # pylint:disable=E0602
                     "helpme"
                 )
-                # https://t.me/TelethonChat/115200
+                # 
                 await event.edit(buttons=buttons)
             else:
-                reply_pop_up_alert = "Lütfen kendine bir @SedenUserBot aç, benim mesajlarımı düzenlemeye çalışma!"
+                reply_pop_up_alert = "Xaiş Özüvə bir @EageUserBot aç, mənim mesajlarımı düzenlemeye çalışma!"
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
         @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
@@ -330,16 +313,16 @@ Hesabınızı bot'a çevirebilirsiniz ve bunları kullanabilirsiniz. Unutmayın,
                 cmdhel = str(CMD_HELP[modul_name])
                 if len(cmdhel) > 90:
                     help_string = str(CMD_HELP[modul_name])[
-                        :90] + "\n\nDevamı için .seden " + modul_name + " yazın."
+                        :90] + "\n\nDevamı için .eage " + modul_name + " yazın."
                 else:
                     help_string = str(CMD_HELP[modul_name])
 
                 reply_pop_up_alert = help_string if help_string  else \
-                    "{} modülü için herhangi bir döküman yazılmamış.".format(
+                    "{} modülü için herhangi bir Şey yazılmamış.".format(
                         modul_name)
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
             else:
-                reply_pop_up_alert = "Lütfen kendine bir @SedenUserBot aç, benim mesajlarımı düzenlemeye çalışma!"
+                reply_pop_up_alert = "Xaiş Özüvə bir @EageUserBot aç, mənim mesajlarımı düzenlemeye çalışma"
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
     except:
         LOGS.info(
